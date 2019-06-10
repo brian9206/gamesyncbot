@@ -1,9 +1,9 @@
 FROM node:10
 
+ADD src /app/src
 ADD package.json /app
 ADD yarn.lock /app
 ADD .babelrc /app
-ADD src /app/src
 
 RUN useradd -s /bin/bash -d /app user && \
     chown -R user:user /app

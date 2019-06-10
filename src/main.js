@@ -1,4 +1,4 @@
-import 'source-map-support/register';
+//import 'source-map-support/register';
 
 // load dotenv
 require('dotenv').config();
