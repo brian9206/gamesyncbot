@@ -12,3 +12,12 @@ A simple Discord bot which tracks the current map of game servers.
 1. Rename `.env.example` to `.env`
 2. Modify `AUTH_TOKEN` in `.env`
 3. `yarn start` or `npm start`
+
+## Docker usage
+```bash
+docker run -d \
+    -v /some/dir/.env:/app/.env \
+    -v /some/dir/bot.db:/app/bot.db \
+    brian9206/gamesyncbot
+```
+
