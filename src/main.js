@@ -1,0 +1,119 @@
+import 'source-map-support/register';
+
+// load dotenv
+require('dotenv').config();
+
+import Discord from 'discord.js';
+import Datastore from 'nedb-promises';
+import Gamedig from 'gamedig';
+import db from './database';
+
+import sendGameServerMessage from './sendGameServerMessage';
+import addserver from './commands/addserver';
+import delserver from './commands/delserver';
+import listserver from './commands/listserver';
+
+// init cache
+const cache = Datastore.create();
+
+// init discord client
+const client = new Discord.Client();
+
+client.on('ready', () => {
+    console.log(`Discord bot connected as ${client.user.tag}`);
+});
+
+client.on('message', msg => {
+    if (!msg.content.startsWith('!') || !msg.member.hasPermission('MANAGE_GUILD')) {
+        return;
+    }
+
+    // parse user input
+    const [ , command, _args ] = msg.content.match(/^!([^ ]+) ?(.*)$/);
+    const args = _args.match(/("[^"]+"|[^\s"]+)/g);
+    
+    switch (command) {
+        case 'addserver':
+            addserver(msg, args);
+            break;
+
+        case 'delserver':
+            delserver(msg, args);
+            break;
+
+        case 'listserver':
+            listserver(msg);
+            break;
+    }
+});
+
+// load database and connect
+client.login(process.env.AUTH_TOKEN).then(() => {
+    // tracker timer
+    async function onTimer() {
+        const servers = {};
+
+        // find all tracking servers
+        const docs = await db.find();
+
+        docs.forEach(doc => {
+            const key = `${doc.host}:${doc.port}`;
+
+            if (servers.hasOwnProperty(key)) {
+                servers[key].append(doc);
+            }
+            else {
+                servers[key] = [doc];
+            }
+        });
+
+        // query all servers
+        const results = await Promise.all(Object.keys(servers).map(key => new Promise(async resolve => {
+            const { host, port, type } = servers[key][0];
+
+            try {
+                console.log(`Querying ${host}:${port} - ${type}...`);
+                const srv = await Gamedig.query({ host, port, type });
+                
+                // check cache
+                const doc = await cache.findOne({ host, port });
+                resolve({ ...srv, docs: servers[key], announce: !doc || doc.map !== srv.map });
+
+                // update cache
+                cache.update({ host, port }, { 
+                    host,
+                    port,
+                    map: srv.map,
+                    time: new Date()
+                }, {
+                    multi: true,
+                    upsert: true
+                });
+                
+                console.log(`${host}:${port} - ${type} is playing ${srv.map}`);
+            }
+            catch (err) {
+                resolve({ docs: servers[key], announce: false });
+                cache.remove({ host, port });
+                console.log(`${host}:${port} - ${type} is currently offline.`);
+            }
+        })));
+
+        results
+            .filter(result => result.announce)
+            .forEach(srv => {
+                srv.docs.forEach(doc => {
+                    const channel = client.channels.get(doc.channel);
+
+                    if (!channel) {
+                        return;
+                    }
+
+                    sendGameServerMessage(channel, srv, doc.host, doc.port, doc.color);
+                });
+            });
+    }
+
+    setInterval(onTimer, process.env.UPDATE_FREQ * 1000);
+    onTimer();
+});
