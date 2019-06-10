@@ -24,7 +24,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    if (!msg.content.startsWith('!') || !msg.member.hasPermission('MANAGE_GUILD')) {
+    if (!msg.content.startsWith('!') || !msg.member || !msg.member.hasPermission('MANAGE_GUILD')) {
         return;
     }
 
@@ -60,7 +60,7 @@ client.login(process.env.AUTH_TOKEN).then(() => {
             const key = `${doc.host}:${doc.port}`;
 
             if (servers.hasOwnProperty(key)) {
-                servers[key].append(doc);
+                servers[key].push(doc);
             }
             else {
                 servers[key] = [doc];
