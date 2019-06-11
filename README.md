@@ -1,4 +1,6 @@
 # GameSyncBot
+[![Add Bot to Server](https://img.shields.io/badge/add%20bot%20on-Discord-7289da.svg)](https://discordapp.com/api/oauth2/authorize?client_id=587610124747800576&permissions=522304&scope=bot)
+
 A simple Discord bot which tracks the current map of game servers.
 
 ## Commands
