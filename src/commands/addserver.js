@@ -75,5 +75,5 @@ export default async function addserver(msg, args) {
     }
 
     await message.edit('✅ **Game server has been added**');
-    await sendGameServerMessage(msg.channel, query, host, port, color);
+    await sendGameServerMessage(msg.channel, query, host, port, type, color);
 }

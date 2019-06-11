@@ -109,7 +109,7 @@ client.login(process.env.AUTH_TOKEN).then(() => {
                         return;
                     }
 
-                    sendGameServerMessage(channel, srv, doc.host, doc.port, doc.color);
+                    sendGameServerMessage(channel, srv, doc.host, doc.port, doc.type, doc.color);
                 });
             });
     }

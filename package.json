@@ -1,7 +1,8 @@
 {
   "name": "game-sync-bot",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.1",
+  "main": "dist/main.js",
+  "repository": "github:brian9206/gamesyncbot",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.5.1",
