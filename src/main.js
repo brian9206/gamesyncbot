@@ -116,4 +116,7 @@ client.login(process.env.AUTH_TOKEN).then(() => {
 
     setInterval(onTimer, process.env.UPDATE_FREQ * 1000);
     onTimer();
+}).catch(err => {
+    console.error('Discord login fails', err);
+    process.exit(1);
 });
