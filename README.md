@@ -3,12 +3,21 @@
 
 A simple Discord bot which tracks the current map of game servers.
 
-## Commands
+## Discord Commands
+You can click the badge above to add the bot to your Discord server.
+
 | Command     | Description                                 | Usage                                                 |
 |-------------|---------------------------------------------|-------------------------------------------------------|
 | !addserver  | Add a game server to the tracking list      | `!addserver <game type> <host>:<port> [color hex code]` |
 | !delserver  | Remove a game server from the tracking list | `!delserver <host>:<port>`                              |
 | !listserver | List all game servers in the tracking list  | `!listserver`                                           |
+
+[Click here to view all supported game type](https://www.npmjs.com/package/gamedig#supported)
+
+---
+
+## Host Bot Instance
+The following instruction is for the one who wants to host your own bot instance on your own computer.
 
 ## Usage
 1. Rename `.env.example` to `.env`
@@ -26,4 +35,3 @@ docker run -d \
     -v /some/dir/db:/app/db \
     brian9206/gamesyncbot
 ```
-

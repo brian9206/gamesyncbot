@@ -21,6 +21,13 @@ const client = new Discord.Client();
 
 client.on('ready', () => {
     console.log(`Discord bot connected as ${client.user.tag}`);
+    
+    client.user.setPresence({
+        game: { 
+            name: 'Source code: github.com/brian9206/gamesyncbot'
+        },
+        status: 'online' 
+    });
 });
 
 client.on('message', msg => {
