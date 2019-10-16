@@ -13,7 +13,7 @@ export default async function listmention(msg) {
             return;
         }
 
-        message.edit(docs.map((doc, index) => `${index + 1}. ${doc.host}:${doc.port} - ${doc.type} - ``${doc.map}```).join('\n'));
+        message.edit(docs.map((doc, index) => `${index + 1}. ${doc.host}:${doc.port} - ${doc.type} - \`${doc.map}\``).join('\n'));
     }
     catch (err) {
         console.error(`Query DB error: ${err.toString()}`);
