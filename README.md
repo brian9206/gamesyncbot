@@ -36,7 +36,7 @@ The following instruction is for the one who wants to host your own bot instance
 2. Modify `AUTH_TOKEN` in `.env`
 3. `yarn start` or `npm start`
 
-## Docker usage
+## Docker image
 [![](https://images.microbadger.com/badges/version/brian9206/gamesyncbot.svg)](https://microbadger.com/images/brian9206/gamesyncbot "Get your own version badge on microbadger.com")
 
 Default user ID is `1001`

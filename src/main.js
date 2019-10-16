@@ -81,7 +81,7 @@ client.on('message', msg => {
                 break;
 
             default:
-                msg.send('Oops, no such command. You can check my manual in my GitHub repository\nhttps://github.com/brian9206/gamesyncbot');
+                msg.channel.send('Oops, no such command. You can check my manual in my GitHub repository\nhttps://github.com/brian9206/gamesyncbot');
                 break;
         }
     }
