@@ -20,7 +20,7 @@ You can send commands through private message to tell the bot to notify you when
 | Command      | Description                                 | Usage                                                          |
 |--------------|---------------------------------------------|----------------------------------------------------------------|
 | !addmention  | Add a mention request to your list          | `!addmention <game type> <host>:<port> <map> [color hex code]` |
-| !delmention  | Remove a mention request in your list       | `!delserver <host>:<port> <map>`                               |
+| !delmention  | Remove a mention request in your list       | `!delmention <host>:<port> <map>`                              |
 | !listmention | List all your mention requests              | `!listmention`                                                 |
 
 [Click here to view all supported game type](https://www.npmjs.com/package/gamedig#supported)  
@@ -28,7 +28,7 @@ You can send commands through private message to tell the bot to notify you when
 
 ---
 
-## Host Bot Instance
+## Host your own bot instance
 The following instruction is for the one who wants to host your own bot instance on your own computer.
 
 ## Usage
@@ -37,6 +37,8 @@ The following instruction is for the one who wants to host your own bot instance
 3. `yarn start` or `npm start`
 
 ## Docker usage
+[![](https://images.microbadger.com/badges/version/brian9206/gamesyncbot.svg)](https://microbadger.com/images/brian9206/gamesyncbot "Get your own version badge on microbadger.com")
+
 Default user ID is `1001`
 ```bash
 chown 1001:1001 /some/dir/.env
