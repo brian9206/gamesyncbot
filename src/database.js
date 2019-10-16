@@ -7,4 +7,11 @@ const db = Datastore.create({
 
 db.persistence.setAutocompactionInterval(60 * 1000);
 
+const mentiondb = Datastore.create({
+    filename: 'db/mentions.db'
+});
+
+mentiondb.persistence.setAutocompactionInterval(60 * 1000);
+
+db.mention = mentiondb;
 export default db;

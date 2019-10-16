@@ -3,16 +3,28 @@
 
 A simple Discord bot which tracks the current map of game servers.
 
-## Discord Commands
+## Discord Commands (Server admin only)
 You can click the badge above to add the bot to your Discord server.
 
-| Command     | Description                                 | Usage                                                 |
-|-------------|---------------------------------------------|-------------------------------------------------------|
+| Command     | Description                                 | Usage                                                   |
+|-------------|---------------------------------------------|---------------------------------------------------------|
 | !addserver  | Add a game server to the tracking list      | `!addserver <game type> <host>:<port> [color hex code]` |
 | !delserver  | Remove a game server from the tracking list | `!delserver <host>:<port>`                              |
 | !listserver | List all game servers in the tracking list  | `!listserver`                                           |
 
 [Click here to view all supported game type](https://www.npmjs.com/package/gamedig#supported)
+
+## Discord Commands (Private message)
+You can send commands through private message to tell the bot to notify you when a game server changed to certain map.
+
+| Command      | Description                                 | Usage                                                          |
+|--------------|---------------------------------------------|----------------------------------------------------------------|
+| !addmention  | Add a mention request to your list          | `!addmention <game type> <host>:<port> <map> [color hex code]` |
+| !delmention  | Remove a mention request in your list       | `!delserver <host>:<port> <map>`                               |
+| !listmention | List all your mention requests              | `!listmention`                                                 |
+
+[Click here to view all supported game type](https://www.npmjs.com/package/gamedig#supported)  
+\* You can use `*` to match any tailing string for `<map>`. For example: `ze_ff*` will match all FF maps.
 
 ---
 
